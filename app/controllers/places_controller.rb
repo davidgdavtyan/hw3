@@ -27,4 +27,22 @@ class PlacesController < ApplicationController
 
     redirect_to "/places"
   end
+
+  def edit
+    @place = Place.find_by({ "id" => params["id"] })
+  end
+
+  def update
+    @place = Place.find_by({ "id" => params["id"] })
+
+    # assign user-entered form data to Company's columns
+    @place["name"] = params["name"]
+    
+    # save Company row
+    @place.save
+
+    # redirect user
+    redirect_to "/place"
+  end
+
 end
