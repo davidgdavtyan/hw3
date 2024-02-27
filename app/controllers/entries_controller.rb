@@ -1,4 +1,5 @@
-class ContactsController < ApplicationController
+class EntriesController < ApplicationController
+  
 
   def show
     @entry = Entry.find_by({"id" => params["id"]})
@@ -14,11 +15,11 @@ class ContactsController < ApplicationController
 
   def create
     # start with a new Contact
-    @entry = entry.new
+    @entry = Entry.new
 
     # assign user-entered form data to Contact's columns
     @entry["title"] = params["title"]
-    @entry["date"] = params["date"]
+    @entry["posted_on"] = params["posted_on"]
     @entry["description"] = params["description"]
 
     # assign relationship between entry and place
@@ -28,7 +29,15 @@ class ContactsController < ApplicationController
     @entry.save
 
     # redirect user
-    redirect_to "/places/#{@place["place_id"]}"
+    redirect_to "/places/#{@entry["place_id"]}"
+  end
+
+  def destroy
+    @entry = Entry.find_by({ "id" => params["id"] })
+
+    @entry.destroy
+
+    redirect_to "/places/#{@entry["place_id"]}"
   end
 
 end

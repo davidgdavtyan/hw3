@@ -1,10 +1,15 @@
-<!-- Contact details page -->
+<!-- Entry details page -->
 
 <h1><%= @entry["title"] %></h1>
 
 <ul>
-  <li><%= @entry["date"] %></li>
+  <p><%= @entry["posted_on"] %></p>
   <li><%= @entry["description"] %></li>
 </ul>
+
+<p><form action="/entries/<%= @entry["id"] %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <button>Delete Entry</button>
+  </form></p>
 
 <p><a href="/places/<%= @place["id"] %>">Back to <%= @place["name"] %></a></p>
